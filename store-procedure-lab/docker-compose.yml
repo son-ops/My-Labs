@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5004:5000"
+    environment:
+      PORT: 5000
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: store_procedure_rce
+      MYSQL_USER: lab_user
+      MYSQL_PASSWORD: lab_password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -prootpassword || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  mysql_data:

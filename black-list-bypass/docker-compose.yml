@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5001:5000"
+    environment:
+      PORT: 5000
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: lab_user
+      DB_PASSWORD: lab_password
+      DB_NAME: testdb
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: lab_user
+      MYSQL_PASSWORD: lab_password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

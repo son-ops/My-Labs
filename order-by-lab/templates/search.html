@@ -1,0 +1,20 @@
+<html>
+    <p><b>Menu</b></p>
+    {% if not by %}
+    <p>You can arrange by <b>by</b> parameter</p>
+    {% endif %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        {% for d in data %}
+        <tr>
+            <td>{{d[0]}}</td>
+            <td>{{d[1]}}</td>
+            <td>{{d[2]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</html>
