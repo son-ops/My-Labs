@@ -1,0 +1,8 @@
+<html>
+    <p>File List in uploads folder</p>
+        <ul>
+            {% for file in files %}
+                <li><a href="{{url_for('list')}}?file={{file}}">{{file}}</a></li>
+            {%endfor%}
+        </ul>
+</html>
