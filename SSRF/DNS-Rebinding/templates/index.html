@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>DNS Rebinding Lab</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 40px;
+                max-width: 900px;
+            }
+
+            input[type="url"] {
+                width: 560px;
+                padding: 8px;
+            }
+
+            input[type="submit"] {
+                padding: 8px 14px;
+            }
+
+            code {
+                background: #f2f2f2;
+                padding: 2px 4px;
+            }
+
+            pre {
+                border: 1px solid #222;
+                padding: 16px;
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+
+            .meta {
+                color: #555;
+            }
+
+            .error {
+                color: #a40000;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>DNS Rebinding Lab</h3>
+        <form method="GET">
+            <input type="url" name="url" value="{{ request.args.get('url', '') }}" required>
+            <input type="submit" value="Send">
+        </form>
+        {% if message %}
+            <p class="meta">{{ message }}</p>
+        {% endif %}
+        {% if validation_ip %}
+            <p class="meta">Validation IP: {{ validation_ip }}</p>
+        {% endif %}
+        {% if status_code %}
+            <p class="meta">Response status: {{ status_code }}</p>
+        {% endif %}
+        {% if error %}
+            <p class="error">Request error: {{ error }}</p>
+        {% endif %}
+        {% if response %}
+            <h4>Response</h4>
+            <pre>{{ response }}</pre>
+        {% endif %}
+    </body>
+</html>
